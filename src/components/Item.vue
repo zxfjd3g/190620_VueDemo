@@ -1,7 +1,7 @@
 <template>
   <li :style="{background: bgColor}" @mouseenter="handleEnter(true)" @mouseleave="handleEnter(false)">
     <label>
-      <input type="checkbox" v-model="todo.complete"/>
+      <input type="checkbox" v-model="isCheck"/>
       <span>{{todo.title}}</span>
     </label>
     <button class="btn btn-danger" v-show="isShow" @click="deleteItem">删除</button>
@@ -14,12 +14,26 @@
     // 声明接收属性: 属性名/属性值的类型
     props: {
       todo: Object,
-      deleteTodo: Function
+      deleteTodo: Function,
+      updateTodo: Function
     },
     data () {
       return {
         bgColor: 'white',
         isShow: false
+      }
+    },
+
+    computed: {
+      isCheck: {
+        get () {
+          return this.todo.complete
+        },
+
+        set (value) {
+          // this.todo.complte = value  // 不要直接在子组件中直接更新父组件的数据
+          this.updateTodo(this.todo, value)
+        }
       }
     },
 

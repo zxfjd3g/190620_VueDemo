@@ -2,7 +2,7 @@
   <div class="todo-container">
     <div class="todo-wrap">
       <Header :addTodo="addTodo" />
-      <List :todos="todos" :deleteTodo="deleteTodo"/>
+      <List :todos="todos" :deleteTodo="deleteTodo" :updateTodo="updateTodo"/>
 
       <Footer :todos="todos" :selectAll="selectAll" :clearAllComplete="clearAllComplete"/>
     </div>
@@ -17,13 +17,30 @@
 
     data () {
       return {
-        todos: [
-          {id: 1, title: 'A', complete: false},
-          {id: 2, title: 'B', complete: true},
-          {id: 4, title: 'C', complete: false},
-        ]
+        todos: [],
+        xxx: 2
       }
     },
+
+    mounted () {
+      setTimeout(() => {
+        // 读取local保存的todos数据
+        const todos = JSON.parse(localStorage.getItem('todos_key') || '[]')
+        // 更新数据
+        this.todos = todos
+      }, 1000);
+    },
+
+    watch: {
+      todos: {
+        deep: true, // 深度监视
+        handler: (value) => { // todos的最新的值
+          // 将最新todos保存local中
+          localStorage.setItem('todos_key', JSON.stringify(value))
+        }
+      }
+    },
+
 
     methods: {
       // 增加
@@ -41,6 +58,11 @@
       // 清除所有已完成的
       clearAllComplete () {
         this.todos = this.todos.filter(todo => !todo.complete)
+      },
+
+      // 更新todo的complete值
+      updateTodo (todo, isCheck) {
+        todo.complete = isCheck
       }
     },
 
