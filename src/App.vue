@@ -2,9 +2,9 @@
   <div class="todo-container">
     <div class="todo-wrap">
       <Header :addTodo="addTodo" />
-      <List :todos="todos"/>
+      <List :todos="todos" :deleteTodo="deleteTodo"/>
 
-      <Footer/>
+      <Footer :todos="todos" :selectAll="selectAll" :clearAllComplete="clearAllComplete"/>
     </div>
   </div>
 </template>
@@ -29,6 +29,18 @@
       // 增加
       addTodo (todo) {
         this.todos.unshift(todo)
+      },
+      // 删除
+      deleteTodo (id) {
+        this.todos = this.todos.filter(todo => id!==todo.id)
+      },
+      // 全选/全不选
+      selectAll (check) {
+        this.todos.forEach(todo => todo.complete = check)
+      },
+      // 清除所有已完成的
+      clearAllComplete () {
+        this.todos = this.todos.filter(todo => !todo.complete)
       }
     },
 
