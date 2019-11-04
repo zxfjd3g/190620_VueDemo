@@ -1,92 +1,59 @@
 <template>
-  <div class="todo-container">
-    <div class="todo-wrap">
-      <!-- <Header :addTodo="addTodo" /> -->
-      <Header @addTodo="addTodo" /> <!-- 的父组件中给子组件对象绑定自定义事件监听 -->
-      <List :todos="todos" :deleteTodo="deleteTodo" :updateTodo="updateTodo"/>
-
-      <Footer :todos="todos" :selectAll="selectAll" :clearAllComplete="clearAllComplete"/>
-    </div>
+  <div>
+    <h2 v-if="!repoName">loading...</h2>
+    <p v-else>
+      most star repo is 
+      <a :href="repoUrl">{{repoName}}</a>
+    </p>
   </div>
 </template>
 
 <script>
-  import Vue from 'vue'
-  import Header from './components/Header'
-  import List from './components/List'
-  import Footer from './components/Footer'
+  import axios from "axios"
   export default {
 
     data () {
       return {
-        todos: [],
-        xxx: 2
+        repoUrl: '',
+        repoName: ''
       }
     },
 
     mounted () {
-      // 组件对象的原型(父)对象就是一个vm对象
-      console.log('App mounted()', this, new Vue())
-      setTimeout(() => {
-        // 读取local保存的todos数据
-        const todos = JSON.parse(localStorage.getItem('todos_key') || '[]')
-        // 更新数据
-        this.todos = todos
-      }, 1000);
-    },
+      // 使用vue-resource发异步ajax请求
+      /* this.$http.get('https://api.github.com/search/repositories?q=j&sort=stars')
+        .then(
+          response => {
+            const result = response.data
+            const {name, html_url} = result.items[0]
+            // 更新数据
+            this.repoUrl = html_url
+            this.repoName = name
+          },
 
-    watch: {
-      todos: {
-        deep: true, // 深度监视
-        handler: (value) => { // todos的最新的值
-          // 将最新todos保存local中
-          localStorage.setItem('todos_key', JSON.stringify(value))
-        }
-      }
-    },
+          error => {
+            alert('请求出错了')
+          }
+        ) */
+      // 使用axios发异步ajax请求
+      axios.get('https://api.github.com/search/repositories2?q=j&sort=stars')
+        .then(
+          response => {
+            const result = response.data
+            const {name, html_url} = result.items[0]
+            // 更新数据
+            this.repoUrl = html_url
+            this.repoName = name
+          },
 
-
-    methods: {
-      // 增加
-      addTodo (todo) {
-        console.log('addTodo()')
-        this.todos.unshift(todo)
-      },
-      // 删除
-      deleteTodo (id) {
-        this.todos = this.todos.filter(todo => id!==todo.id)
-      },
-      // 全选/全不选
-      selectAll (check) {
-        this.todos.forEach(todo => todo.complete = check)
-      },
-      // 清除所有已完成的
-      clearAllComplete () {
-        this.todos = this.todos.filter(todo => !todo.complete)
-      },
-
-      // 更新todo的complete值
-      updateTodo (todo, isCheck) {
-        todo.complete = isCheck
-      }
-    },
-
-    components: { // 定义局部组件
-      Header,
-      List,
-      Footer
+          error => {
+            alert('请求出错了')
+          }
+        )
     }
+   
   }
 </script>
 
 <style>
-  .todo-container {
-    width: 600px;
-    margin: 0 auto;
-  }
-  .todo-container .todo-wrap {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
 </style>

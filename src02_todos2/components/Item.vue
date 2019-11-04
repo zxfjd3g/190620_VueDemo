@@ -14,7 +14,6 @@
     // 声明接收属性: 属性名/属性值的类型
     props: {
       todo: Object,
-      deleteTodo: Function,
       updateTodo: Function
     },
     data () {
@@ -50,7 +49,9 @@
 
       deleteItem () {
         if (confirm('确定删除吗?')) {
-          this.deleteTodo(this.todo.id)
+          // this.deleteTodo(this.todo.id)
+          // 通过事件总线分发事件
+          this.$eventBus.$emit('deleteTodo', this.todo.id)
         }
       }
     }
