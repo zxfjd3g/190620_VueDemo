@@ -10,7 +10,22 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      '/api': { // 匹配path以什么开头的请求
+        target: 'http://localhost:4000',  // 目标url
+        changeOrigin: true, // 允许跨域  
+        pathRewrite: { // 路径重写
+          '^/api': '' // 去掉/api
+        }
+      }, // http://localhost:4000/api/search/users?q=aaa
+      '/baidu': { // 匹配path以什么开头的请求
+        target: 'http://www.baidu.com',  // 目标url
+        changeOrigin: true, // 允许跨域  
+        pathRewrite: { // 路径重写
+          '^/baidu': '' // 去掉/api
+        }
+      }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

@@ -38,7 +38,7 @@
         try {
            // 发请求
           const response = await axios({
-            url: 'https://api.github.com/search/users',
+            url: '/api/search/users', // http://localhost:8080/api/search/users
             params: {
               q: searchName
             }
