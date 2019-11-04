@@ -30,14 +30,13 @@
         <script>
           export default {
             props: []/{}
-                  data(){},
+            data(){},
             computed: {}
-                  methods: {},
-
-              watch: {}
-              filters: {}
-              directives: {}
-              components: {}
+            methods: {},
+            watch: {}
+            filters: {}
+            directives: {}
+            components: {}
           }
         </script>
         <style>

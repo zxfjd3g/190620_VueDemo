@@ -9,10 +9,10 @@
     name: 'Header',
     // 声明接收属性: 属性名/属性值的类型/属性的必要性
     props: {
-      // addTodo: {
-      //   type: Function,
-      //   required: true,
-      // }
+      addTodo: {
+        type: Function,
+        required: true,
+      }
     },
 
     data () {
@@ -36,11 +36,7 @@
           title,
         }
         // 调用addTodo()来添加todo
-        // this.addTodo(todo)
-        // 分发自定义事件(addTodo)
-        this.$emit('addTodo', todo)
-        console.log('$emit()之后')
-
+        this.addTodo(todo)
         // 清除输入
         this.title = ''
       }

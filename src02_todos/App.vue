@@ -1,8 +1,7 @@
 <template>
   <div class="todo-container">
     <div class="todo-wrap">
-      <!-- <Header :addTodo="addTodo" /> -->
-      <Header @addTodo="addTodo" /> <!-- 的父组件中给子组件对象绑定自定义事件监听 -->
+      <Header :addTodo="addTodo" />
       <List :todos="todos" :deleteTodo="deleteTodo" :updateTodo="updateTodo"/>
 
       <Footer :todos="todos" :selectAll="selectAll" :clearAllComplete="clearAllComplete"/>
@@ -11,7 +10,6 @@
 </template>
 
 <script>
-  import Vue from 'vue'
   import Header from './components/Header'
   import List from './components/List'
   import Footer from './components/Footer'
@@ -25,8 +23,6 @@
     },
 
     mounted () {
-      // 组件对象的原型(父)对象就是一个vm对象
-      console.log('App mounted()', this, new Vue())
       setTimeout(() => {
         // 读取local保存的todos数据
         const todos = JSON.parse(localStorage.getItem('todos_key') || '[]')
@@ -49,7 +45,6 @@
     methods: {
       // 增加
       addTodo (todo) {
-        console.log('addTodo()')
         this.todos.unshift(todo)
       },
       // 删除
