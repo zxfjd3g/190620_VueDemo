@@ -2,7 +2,9 @@
   <div>
     <ul>
       <li v-for="message in messages" :key="message.id">
-        <router-link :to="'/home/message/detail/' + message.id">{{message.title}}</router-link>
+        <!-- <router-link :to="'/home/message/detail/' + message.id">{{message.title}}</router-link> -->
+        <!-- <router-link :to="{path: '/home/message/detail/' + message.id}">{{message.title}}</router-link> -->
+        <router-link :to="{name: 'detail', params: {id: message.id}}">{{message.title}}</router-link>
       </li>
     </ul>
 

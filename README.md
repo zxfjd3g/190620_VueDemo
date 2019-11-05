@@ -125,11 +125,15 @@
           .catch(error => {
           console.log(error.message)
           })
+    执行ajax的时机
+        mounted()
+        事件回调函数
+    解决开发时ajax跨域的问题: 配置代理
 
 ## 7. vue UI组件库
     常用的UI组件库
         PC: Element / iview /
-        Mobile: mint-ui / cube-ui
+        Mobile: mint-ui / cube-ui / vant
     mint-ui的使用
         根据官方文档使用
         按需打包

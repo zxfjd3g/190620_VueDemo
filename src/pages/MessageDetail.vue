@@ -1,6 +1,6 @@
 <template>
   <ul>
-    <li>ID: {{$route.params.id}}</li>
+    <li>ID: {{$route.params.id}}---{{$route.query.id}}</li>
     <li>TITLE: {{detail.title}}</li>
     <li>CONTENT: {{detail.content}}</li>
   </ul>
