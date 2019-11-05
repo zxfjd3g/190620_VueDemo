@@ -185,7 +185,7 @@
         params/query: <router-link to="/home/news/abc/123?zzz=1234">
         将请求参数映射成props: props: route => ({id: route.params.id})
         变相props: <router-view msg='abc'>
-    缓存路由组件
+    缓存路由组件对象
         路由组件对象默认的生命周期: 被切换时就会死亡, 切换回来时重新创建
         <keep-alive>
           <router-view></router-view>

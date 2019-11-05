@@ -28,7 +28,8 @@ export default [
           {
             name: 'detail',  // 标识名称
             path: '/home/message/detail/:id',
-            component: MessageDetail
+            component: MessageDetail,
+            props: (route) => ({ id: route.params.id })
           }
         ]
       },
