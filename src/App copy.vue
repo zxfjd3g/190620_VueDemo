@@ -30,31 +30,17 @@
       console.log(this.$store)
     },
 
-    /* computed: {
+    computed: {
       count () {
         return this.$store.state.count
       },
       evenOrOdd () {
         return this.$store.getters.evenOrOdd
       }
-    }, */
-
-    computed: {
-      ...mapState(['count']),  // {count: function (){return this.$store.state['count']}}
-      ...mapGetters(['evenOrOdd']) // {evenOrOdd () {return this.$store.getters['evenOrOdd']}}
     },
 
     methods: {
-      ...mapMutations({
-        increment: 'INCREMENT',
-        decrement: 'DECREMENT'
-      }),
-      ...mapActions(['incrementIfOdd', 'incrementAsync']),
-    }
-
-    /* methods: {
       increment () {
-        console.log('aaa')
         this.$store.commit('INCREMENT')
       },
       decrement () {
@@ -66,7 +52,7 @@
       incrementAsync () {
         this.$store.dispatch('incrementAsync')
       },
-    } */
+    }
   }
 
 </script>
