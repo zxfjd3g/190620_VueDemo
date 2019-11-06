@@ -13,12 +13,12 @@ export default {
     state.loading = true
   },
 
-  [REQ_SUCCESS] (state, users) {
+  [REQ_SUCCESS] (state, {users}) {
     state.loading = false
     state.users = users
   },
   
-  [REQ_ERROR] (state, msg) {
+  [REQ_ERROR] (state, {msg}) {
     state.loading = false
     state.errorMsg = msg
   },

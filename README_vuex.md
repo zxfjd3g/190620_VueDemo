@@ -39,7 +39,7 @@
       }
     }
 
-## 5). modules
+## 5). modules    vuex多模块编程
     包含多个module的对象
     一个module是一个包含state/mutations/actions/getters的对象
     是将一复杂应用的vuex代码进行多模块拆分的第2种方式

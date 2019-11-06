@@ -187,10 +187,10 @@
         变相props: <router-view msg='abc'>
     缓存路由组件对象
         路由组件对象默认的生命周期: 被切换时就会死亡, 切换回来时重新创建
-        <keep-alive>
+        <keep-alive exclude="A" include="A">
           <router-view></router-view>
         </keep-alive>
     路由的编程式导航
-        this.$router.push(path): 相当于点击路由链接(可以返回到当前路由界面)
-        this.$router.replace(path): 用新路由替换当前路由(不可以返回到当前路由界面)
+        this.$router.push({path: ''}): 相当于点击路由链接(可以返回到当前路由界面)
+        this.$router.replace({name: '', params: {}}): 用新路由替换当前路由(不可以返回到当前路由界面)
         this.$router.back(): 请求(返回)上一个记录路由

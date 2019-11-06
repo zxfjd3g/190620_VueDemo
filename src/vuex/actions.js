@@ -33,10 +33,10 @@ export default {
         url: item.html_url,
         avatar_url: item.avatar_url,
       }))
-      commit(REQ_SUCCESS, users)
+      commit(REQ_SUCCESS, {users})
     } catch (error) {
       // 如果失败了, 更新数据(失败)
-      commit(REQ_ERROR, error.message)
+      commit(REQ_ERROR, {msg: error.message})
     }
   }
 }
