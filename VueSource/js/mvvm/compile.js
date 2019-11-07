@@ -130,16 +130,19 @@ var compileUtil = {
 
     /* v-model */
     model: function(node, vm, exp) {
+        /* 
+        1. 实现input的初始化显示
+        2. 创建watcher, 用于在数据改变时, 节点自动更新
+        */
         this.bind(node, vm, exp, 'model');
 
         var me = this,
             val = this._getVMVal(vm, exp);
-        node.addEventListener('input', function(e) {
+        // 绑定input监听
+        node.addEventListener('input', function(e) { // 当输入发生改变
+            // 得到输入的最新值
             var newValue = e.target.value;
-            if (val === newValue) {
-                return;
-            }
-
+            // 将值保存到表达式对应的属性上  ===> 进入数据绑定的更新流程
             me._setVMVal(vm, exp, newValue);
             val = newValue;
         });
@@ -159,6 +162,7 @@ var compileUtil = {
         // 调用更新节点的函数 ===> 实现界面的初始化显示
         updaterFn && updaterFn(node, this._getVMVal(vm, exp));
 
+        // 创建表达式对应的watcher  ==> 用于将来数据更新时自动去更新对应的节点
         new Watcher(vm, exp, function(value, oldValue) {
             updaterFn && updaterFn(node, value, oldValue);
         });

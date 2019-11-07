@@ -5,5 +5,31 @@
   <title>07_数据双向绑定</title>
 </head>
 <body>
+
+  <div id="test">
+    <!-- 
+      input.value = msg表达式的值 : 初始化显示  模板解析
+      input.addEventListener('input', (event) => {将event.target.value保存到data的msg属性})
+     -->
+    <input type="text" v-model="msg">  
+    <p>{{msg}}</p>
+  </div>
+  
+  <script src="./js/mvvm/mvvm.js"></script>
+  <script src="./js/mvvm/compile.js"></script>
+  <script src="./js/mvvm/observer.js"></script>
+  <script src="./js/mvvm/watcher.js"></script>
+  <script>
+    const vm = new MVVM({
+      el: '#test',
+      data: {
+        msg: 'tom',
+      }
+    })
+
+    setTimeout(() => {
+      vm.msg = 'jack'
+    }, 2000);
+  </script>
 </body>
 </html>
